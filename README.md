@@ -62,3 +62,5 @@ bun run build
 ```
 
 The same sequence is `fw.yaml` → `registry/install.yaml`. Do not `--skip-core` on init, or `utils` never lands.
+
+`src/lib` is the starter and is not installed by `ui8kit`: `copy.ts`, `menus.ts`, and `host.ts`. `App.tsx` passes those into the screens. `host.ts` stays on fixture data until a Wails binding replaces `readText`.
