@@ -1,0 +1,9 @@
+{
+  "name": "@fastygo/wails-solid",
+  "private": true,
+  "type": "module",
+  "description": "Solid screens for fastygo/wails. Install from solid/r with ui8kit.",
+  "dependencies": {
+    "solid-js": "^1.9.9"
+  }
+}

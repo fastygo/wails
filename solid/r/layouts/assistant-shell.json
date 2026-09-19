@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.buildy.tw/schema/registry-item.json",
+  "name": "assistant-shell",
+  "type": "registry:layout",
+  "title": "Assistant shell",
+  "description": "Chat and browse slots. Panels are props.",
+  "runtime": "solid",
+  "dependencies": [
+    "solid-js"
+  ],
+  "devDependencies": [],
+  "files": [
+    {
+      "path": "solid/src/layouts/assistant-shell/AssistantShell.solid.tsx",
+      "content": "import { Show, type JSX } from \"solid-js\";\r\nimport { fixture } from \"./fixture.shared\";\r\n\r\nexport type AssistantShellProps = {\r\n  title?: string;\r\n  chat?: JSX.Element;\r\n  browse?: JSX.Element;\r\n};\r\n\r\nexport function AssistantShell(props: AssistantShellProps): JSX.Element {\r\n  const title = () => props.title ?? fixture.title;\r\n  return (\r\n    <div class=\"flex h-full min-h-0 min-w-0 flex-col\" data-surface=\"assistant-shell\">\r\n      <header class=\"flex h-8 shrink-0 items-center border-b border-border px-2 text-xs font-medium\">{title()}</header>\r\n      <div class=\"flex min-h-0 flex-1\">\r\n        <div class=\"min-w-0 flex-1 border-r border-border\" aria-label={fixture.chat}>\r\n          <Show when={props.chat} fallback={<p class=\"p-2 text-xs text-muted-foreground\">{fixture.empty}</p>}>\r\n            {props.chat}\r\n          </Show>\r\n        </div>\r\n        <div class=\"min-w-0 flex-1\" aria-label={fixture.browse}>\r\n          <Show when={props.browse} fallback={<p class=\"p-2 text-xs text-muted-foreground\">{fixture.empty}</p>}>\r\n            {props.browse}\r\n          </Show>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  );\r\n}\r\n",
+      "target": "layouts/assistant-shell/AssistantShell.solid.tsx"
+    },
+    {
+      "path": "solid/src/layouts/assistant-shell/fixture.shared.ts",
+      "content": "/** Same data as fixtures/assistant-shell.json. */\r\nexport const fixture = {\r\n  title: \"Assistant\",\r\n  chat: \"Chat\",\r\n  browse: \"Browse\",\r\n  empty: \"Pass a panel as a prop.\",\r\n};\r\n",
+      "target": "layouts/assistant-shell/fixture.shared.ts"
+    }
+  ]
+}

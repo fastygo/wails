@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.buildy.tw/schema/registry-item.json",
+  "name": "workshop-shell",
+  "type": "registry:layout",
+  "title": "Workshop shell",
+  "description": "Files, editor, terminal, and agent slots. Panels are props.",
+  "runtime": "solid",
+  "dependencies": [
+    "solid-js"
+  ],
+  "devDependencies": [],
+  "files": [
+    {
+      "path": "solid/src/layouts/workshop-shell/WorkshopShell.solid.tsx",
+      "content": "import { Show, type JSX } from \"solid-js\";\r\nimport { fixture } from \"./fixture.shared\";\r\n\r\nexport type WorkshopShellProps = {\r\n  files?: JSX.Element;\r\n  editor?: JSX.Element;\r\n  terminal?: JSX.Element;\r\n  agent?: JSX.Element;\r\n};\r\n\r\nexport function WorkshopShell(props: WorkshopShellProps): JSX.Element {\r\n  return (\r\n    <div class=\"flex h-full min-h-0 min-w-0\" data-surface=\"workshop-shell\">\r\n      <div class=\"flex w-64 min-w-0 shrink-0 flex-col border-r border-border\" aria-label={fixture.files}>\r\n        <Show when={props.files} fallback={<p class=\"p-2 text-xs text-muted-foreground\">{fixture.empty}</p>}>\r\n          {props.files}\r\n        </Show>\r\n      </div>\r\n      <div class=\"flex min-h-0 min-w-0 flex-1 flex-col\">\r\n        <div class=\"min-h-0 flex-1\" aria-label={fixture.editor}>\r\n          <Show when={props.editor} fallback={<p class=\"p-2 text-xs text-muted-foreground\">{fixture.empty}</p>}>\r\n            {props.editor}\r\n          </Show>\r\n        </div>\r\n        <div class=\"h-40 shrink-0 border-t border-border\" aria-label={fixture.terminal}>\r\n          <Show when={props.terminal} fallback={<p class=\"p-2 text-xs text-muted-foreground\">{fixture.empty}</p>}>\r\n            {props.terminal}\r\n          </Show>\r\n        </div>\r\n      </div>\r\n      <div class=\"flex w-80 min-w-0 shrink-0 flex-col border-l border-border\" aria-label={fixture.agent}>\r\n        <Show when={props.agent} fallback={<p class=\"p-2 text-xs text-muted-foreground\">{fixture.empty}</p>}>\r\n          {props.agent}\r\n        </Show>\r\n      </div>\r\n    </div>\r\n  );\r\n}\r\n",
+      "target": "layouts/workshop-shell/WorkshopShell.solid.tsx"
+    },
+    {
+      "path": "solid/src/layouts/workshop-shell/fixture.shared.ts",
+      "content": "/** Same data as fixtures/workshop-shell.json. */\r\nexport const fixture = {\r\n  files: \"Files\",\r\n  editor: \"Editor\",\r\n  terminal: \"Terminal\",\r\n  agent: \"Agent\",\r\n  empty: \"Pass a panel as a prop.\",\r\n};\r\n",
+      "target": "layouts/workshop-shell/fixture.shared.ts"
+    }
+  ]
+}

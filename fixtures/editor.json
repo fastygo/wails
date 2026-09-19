@@ -1,0 +1,8 @@
+{
+  "tabs": [
+    { "path": "src/main.go", "dirty": false },
+    { "path": "README.md", "dirty": true }
+  ],
+  "activePath": "src/main.go",
+  "value": "package main\n\nfunc main() {\n}\n"
+}

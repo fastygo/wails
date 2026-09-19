@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.buildy.tw/schema/registry-item.json",
+  "name": "explorer",
+  "type": "registry:widget",
+  "title": "Explorer",
+  "description": "File tree with fixture nodes. Host data arrives through props.",
+  "runtime": "solid",
+  "dependencies": [
+    "solid-js"
+  ],
+  "devDependencies": [],
+  "files": [
+    {
+      "path": "solid/src/widgets/explorer/Explorer.solid.tsx",
+      "content": "import { For, Show, createEffect, createSignal, type JSX } from \"solid-js\";\r\nimport { fixture, type TreeNode } from \"./fixture.shared\";\r\n\r\nexport type ExplorerProps = {\r\n  label?: string;\r\n  nodes?: TreeNode[];\r\n  selected?: string;\r\n  onOpen?: (path: string) => void;\r\n};\r\n\r\nexport function Explorer(props: ExplorerProps): JSX.Element {\r\n  const nodes = () => props.nodes ?? fixture.nodes;\r\n  const selected = () => props.selected ?? fixture.selected;\r\n  const label = () => props.label ?? fixture.label;\r\n\r\n  return (\r\n    <aside class=\"flex h-full min-h-0 min-w-0 flex-col bg-card\" aria-label={label()} data-surface=\"explorer\">\r\n      <div class=\"flex h-8 shrink-0 items-center border-b border-border px-2 text-xs font-medium\">{label()}</div>\r\n      <ul class=\"m-0 min-h-0 flex-1 list-none overflow-auto p-0\">\r\n        <For each={nodes()}>\r\n          {(node) => <Branch node={node} depth={0} selected={selected()} onOpen={props.onOpen} />}\r\n        </For>\r\n      </ul>\r\n    </aside>\r\n  );\r\n}\r\n\r\nfunction Branch(props: {\r\n  node: TreeNode;\r\n  depth: number;\r\n  selected: string;\r\n  onOpen?: (path: string) => void;\r\n}): JSX.Element {\r\n  const kids = () => props.node.children ?? [];\r\n  const [open, setOpen] = createSignal(props.depth < 1);\r\n  createEffect(() => {\r\n    if (props.node.dir && props.selected.startsWith(`${props.node.path}/`)) setOpen(true);\r\n  });\r\n\r\n  return (\r\n    <li class=\"m-0 list-none\">\r\n      <button\r\n        type=\"button\"\r\n        class={`flex h-6 w-full items-center gap-2 px-2 text-left text-xs ${props.selected === props.node.path ? \"bg-accent\" : \"\"}`}\r\n        style={{ \"padding-left\": `${8 + props.depth * 16}px` }}\r\n        aria-current={!props.node.dir && props.selected === props.node.path ? \"page\" : undefined}\r\n        aria-expanded={props.node.dir ? open() : undefined}\r\n        onClick={() => {\r\n          if (props.node.dir) setOpen((value) => !value);\r\n          else props.onOpen?.(props.node.path);\r\n        }}\r\n      >\r\n        <span aria-hidden=\"true\">{props.node.dir ? (open() ? \"v\" : \">\") : \"-\"}</span>\r\n        {props.node.name}\r\n      </button>\r\n      <Show when={props.node.dir && open() && kids().length > 0}>\r\n        <ul class=\"m-0 list-none p-0\">\r\n          <For each={kids()}>\r\n            {(child) => (\r\n              <Branch node={child} depth={props.depth + 1} selected={props.selected} onOpen={props.onOpen} />\r\n            )}\r\n          </For>\r\n        </ul>\r\n      </Show>\r\n    </li>\r\n  );\r\n}\r\n",
+      "target": "widgets/explorer/Explorer.solid.tsx"
+    },
+    {
+      "path": "solid/src/widgets/explorer/fixture.shared.ts",
+      "content": "export type TreeNode = {\r\n  name: string;\r\n  path: string;\r\n  dir: boolean;\r\n  children?: TreeNode[];\r\n};\r\n\r\n/** Same data as fixtures/explorer.json. Kept as .shared.ts so --runtime solid installs it. */\r\nexport const fixture = {\r\n  label: \"Files\",\r\n  selected: \"src/main.go\",\r\n  nodes: [\r\n    {\r\n      name: \"src\",\r\n      path: \"src\",\r\n      dir: true,\r\n      children: [{ name: \"main.go\", path: \"src/main.go\", dir: false }],\r\n    },\r\n    { name: \"README.md\", path: \"README.md\", dir: false },\r\n  ] as TreeNode[],\r\n};\r\n",
+      "target": "widgets/explorer/fixture.shared.ts"
+    }
+  ]
+}

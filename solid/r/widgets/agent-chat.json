@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.buildy.tw/schema/registry-item.json",
+  "name": "agent-chat",
+  "type": "registry:widget",
+  "title": "Agent chat",
+  "description": "Chat panel with a fixture reply. No agent runtime.",
+  "runtime": "solid",
+  "dependencies": [
+    "solid-js"
+  ],
+  "devDependencies": [],
+  "files": [
+    {
+      "path": "solid/src/widgets/agent-chat/AgentChat.solid.tsx",
+      "content": "import { For, createSignal, type JSX } from \"solid-js\";\r\nimport { fixture, type ChatMessage } from \"./fixture.shared\";\r\n\r\nexport type AgentChatProps = {\r\n  title?: string;\r\n  messages?: ChatMessage[];\r\n  onSend?: (text: string) => void;\r\n};\r\n\r\nexport function AgentChat(props: AgentChatProps): JSX.Element {\r\n  const [messages, setMessages] = createSignal(props.messages ?? fixture.messages);\r\n  const [draft, setDraft] = createSignal(\"\");\r\n  const title = () => props.title ?? fixture.title;\r\n\r\n  const send = () => {\r\n    const text = draft().trim();\r\n    if (!text) return;\r\n    const id = String(Date.now());\r\n    setMessages((prev) => [\r\n      ...prev,\r\n      { id, role: \"user\", text },\r\n      { id: `${id}-fixture`, role: \"assistant\", text: \"Fixture reply. No agent runtime is connected.\" },\r\n    ]);\r\n    setDraft(\"\");\r\n    props.onSend?.(text);\r\n  };\r\n\r\n  return (\r\n    <aside class=\"flex h-full min-h-0 min-w-0 flex-col bg-card\" data-surface=\"agent-chat\" aria-label={title()}>\r\n      <div class=\"flex h-8 shrink-0 items-center border-b border-border px-2 text-xs font-medium\">{title()}</div>\r\n      <div class=\"min-h-0 flex-1 space-y-2 overflow-auto p-2 text-xs\" aria-live=\"polite\">\r\n        <For each={messages()}>\r\n          {(message) => (\r\n            <p class={message.role === \"user\" ? \"text-foreground\" : \"text-muted-foreground\"}>{message.text}</p>\r\n          )}\r\n        </For>\r\n      </div>\r\n      <form\r\n        class=\"flex border-t border-border\"\r\n        onSubmit={(event) => {\r\n          event.preventDefault();\r\n          send();\r\n        }}\r\n      >\r\n        <input\r\n          class=\"h-8 min-w-0 flex-1 bg-background px-2 text-xs\"\r\n          aria-label=\"Agent message\"\r\n          value={draft()}\r\n          onInput={(event) => setDraft(event.currentTarget.value)}\r\n        />\r\n      </form>\r\n    </aside>\r\n  );\r\n}\r\n",
+      "target": "widgets/agent-chat/AgentChat.solid.tsx"
+    },
+    {
+      "path": "solid/src/widgets/agent-chat/fixture.shared.ts",
+      "content": "export type ChatMessage = { id: string; role: \"assistant\" | \"user\"; text: string };\r\n\r\n/** Same data as fixtures/agent-chat.json. */\r\nexport const fixture = {\r\n  title: \"Agent\",\r\n  messages: [\r\n    {\r\n      id: \"1\",\r\n      role: \"assistant\" as const,\r\n      text: \"Fixture reply. No agent runtime is connected.\",\r\n    },\r\n  ] as ChatMessage[],\r\n};\r\n",
+      "target": "widgets/agent-chat/fixture.shared.ts"
+    }
+  ]
+}

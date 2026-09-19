@@ -1,0 +1,88 @@
+{
+  "$schema": "https://ui.buildy.tw/schema/registry.json",
+  "components": [
+    {
+      "name": "explorer",
+      "type": "registry:widget",
+      "title": "Explorer",
+      "description": "File tree with fixture nodes. Host data arrives through props.",
+      "dependencies": [
+        "solid-js"
+      ],
+      "registryDependencies": []
+    },
+    {
+      "name": "editor",
+      "type": "registry:widget",
+      "title": "Editor",
+      "description": "Tab strip and buffer. Fixture text, no host document service.",
+      "dependencies": [
+        "solid-js"
+      ],
+      "registryDependencies": []
+    },
+    {
+      "name": "terminal",
+      "type": "registry:widget",
+      "title": "Terminal",
+      "description": "Line panel with fixture output. No PTY and no host process.",
+      "dependencies": [
+        "solid-js"
+      ],
+      "registryDependencies": []
+    },
+    {
+      "name": "agent-chat",
+      "type": "registry:widget",
+      "title": "Agent chat",
+      "description": "Chat panel with a fixture reply. No agent runtime.",
+      "dependencies": [
+        "solid-js"
+      ],
+      "registryDependencies": []
+    },
+    {
+      "name": "browser",
+      "type": "registry:widget",
+      "title": "Browser",
+      "description": "URL chrome and a preview note. No WebView.",
+      "dependencies": [
+        "solid-js"
+      ],
+      "registryDependencies": []
+    },
+    {
+      "name": "workshop-shell",
+      "type": "registry:layout",
+      "title": "Workshop shell",
+      "description": "Files, editor, terminal, and agent slots. Panels are props.",
+      "dependencies": [
+        "solid-js"
+      ],
+      "registryDependencies": []
+    },
+    {
+      "name": "assistant-shell",
+      "type": "registry:layout",
+      "title": "Assistant shell",
+      "description": "Chat and browse slots. Panels are props.",
+      "dependencies": [
+        "solid-js"
+      ],
+      "registryDependencies": []
+    }
+  ],
+  "categories": [
+    "lib",
+    "utils",
+    "ui",
+    "components",
+    "blocks",
+    "layouts",
+    "variants",
+    "widgets"
+  ],
+  "version": "1.0.0",
+  "lastUpdated": "2026-09-19T12:47:15.073Z",
+  "registry": "ui"
+}

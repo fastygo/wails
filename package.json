@@ -1,0 +1,9 @@
+{
+  "name": "@fastygo/wails",
+  "private": true,
+  "type": "module",
+  "description": "Desktop BFF host plus runtime UI registries. Solid is the first runtime.",
+  "scripts": {
+    "build:solid": "ui8kit build solid/registry.json -o solid/r"
+  }
+}

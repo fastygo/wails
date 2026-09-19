@@ -1,0 +1,10 @@
+{
+  "title": "Agent",
+  "messages": [
+    {
+      "id": "1",
+      "role": "assistant",
+      "text": "Fixture reply. No agent runtime is connected."
+    }
+  ]
+}

@@ -1,0 +1,131 @@
+{
+  "$schema": "https://ui.buildy.tw/schema/registry.json",
+  "items": [
+    {
+      "name": "explorer",
+      "type": "registry:widget",
+      "runtime": "solid",
+      "title": "Explorer",
+      "description": "File tree with fixture nodes. Host data arrives through props.",
+      "dependencies": ["solid-js"],
+      "files": [
+        {
+          "path": "solid/src/widgets/explorer/Explorer.solid.tsx",
+          "target": "widgets/explorer/Explorer.solid.tsx"
+        },
+        {
+          "path": "solid/src/widgets/explorer/fixture.shared.ts",
+          "target": "widgets/explorer/fixture.shared.ts"
+        }
+      ]
+    },
+    {
+      "name": "editor",
+      "type": "registry:widget",
+      "runtime": "solid",
+      "title": "Editor",
+      "description": "Tab strip and buffer. Fixture text, no host document service.",
+      "dependencies": ["solid-js"],
+      "files": [
+        {
+          "path": "solid/src/widgets/editor/Editor.solid.tsx",
+          "target": "widgets/editor/Editor.solid.tsx"
+        },
+        {
+          "path": "solid/src/widgets/editor/fixture.shared.ts",
+          "target": "widgets/editor/fixture.shared.ts"
+        }
+      ]
+    },
+    {
+      "name": "terminal",
+      "type": "registry:widget",
+      "runtime": "solid",
+      "title": "Terminal",
+      "description": "Line panel with fixture output. No PTY and no host process.",
+      "dependencies": ["solid-js"],
+      "files": [
+        {
+          "path": "solid/src/widgets/terminal/Terminal.solid.tsx",
+          "target": "widgets/terminal/Terminal.solid.tsx"
+        },
+        {
+          "path": "solid/src/widgets/terminal/fixture.shared.ts",
+          "target": "widgets/terminal/fixture.shared.ts"
+        }
+      ]
+    },
+    {
+      "name": "agent-chat",
+      "type": "registry:widget",
+      "runtime": "solid",
+      "title": "Agent chat",
+      "description": "Chat panel with a fixture reply. No agent runtime.",
+      "dependencies": ["solid-js"],
+      "files": [
+        {
+          "path": "solid/src/widgets/agent-chat/AgentChat.solid.tsx",
+          "target": "widgets/agent-chat/AgentChat.solid.tsx"
+        },
+        {
+          "path": "solid/src/widgets/agent-chat/fixture.shared.ts",
+          "target": "widgets/agent-chat/fixture.shared.ts"
+        }
+      ]
+    },
+    {
+      "name": "browser",
+      "type": "registry:widget",
+      "runtime": "solid",
+      "title": "Browser",
+      "description": "URL chrome and a preview note. No WebView.",
+      "dependencies": ["solid-js"],
+      "files": [
+        {
+          "path": "solid/src/widgets/browser/Browser.solid.tsx",
+          "target": "widgets/browser/Browser.solid.tsx"
+        },
+        {
+          "path": "solid/src/widgets/browser/fixture.shared.ts",
+          "target": "widgets/browser/fixture.shared.ts"
+        }
+      ]
+    },
+    {
+      "name": "workshop-shell",
+      "type": "registry:layout",
+      "runtime": "solid",
+      "title": "Workshop shell",
+      "description": "Files, editor, terminal, and agent slots. Panels are props.",
+      "dependencies": ["solid-js"],
+      "files": [
+        {
+          "path": "solid/src/layouts/workshop-shell/WorkshopShell.solid.tsx",
+          "target": "layouts/workshop-shell/WorkshopShell.solid.tsx"
+        },
+        {
+          "path": "solid/src/layouts/workshop-shell/fixture.shared.ts",
+          "target": "layouts/workshop-shell/fixture.shared.ts"
+        }
+      ]
+    },
+    {
+      "name": "assistant-shell",
+      "type": "registry:layout",
+      "runtime": "solid",
+      "title": "Assistant shell",
+      "description": "Chat and browse slots. Panels are props.",
+      "dependencies": ["solid-js"],
+      "files": [
+        {
+          "path": "solid/src/layouts/assistant-shell/AssistantShell.solid.tsx",
+          "target": "layouts/assistant-shell/AssistantShell.solid.tsx"
+        },
+        {
+          "path": "solid/src/layouts/assistant-shell/fixture.shared.ts",
+          "target": "layouts/assistant-shell/fixture.shared.ts"
+        }
+      ]
+    }
+  ]
+}
