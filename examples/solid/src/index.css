@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+@theme {
+  --color-card: #f4f4f5;
+  --color-background: #ffffff;
+  --color-border: #e4e4e7;
+  --color-accent: #e4e4e7;
+  --color-foreground: #18181b;
+  --color-muted-foreground: #71717a;
+  --color-primary: #18181b;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}

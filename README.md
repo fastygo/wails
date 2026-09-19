@@ -30,3 +30,18 @@ bunx ui8kit add explorer \
 ```
 
 `--runtime solid` keeps `*.solid.tsx` and `*.shared.ts`. Fixture modules use the `.shared.ts` suffix for that reason.
+
+## Example
+
+`examples/solid` is a normal Vite app. Screens are not copied by hand. From that folder:
+
+```bash
+bun install
+bunx ui8kit@2.0.1 init --yes --framework solid --runtime solid --dir src --skip-core \
+  --registry-url https://raw.githubusercontent.com/fastygo/wails/refs/heads/main/solid/r \
+  --strict-cdn
+bunx ui8kit@2.0.1 add --all --runtime solid --force \
+  --registry-url https://raw.githubusercontent.com/fastygo/wails/refs/heads/main/solid/r \
+  --strict-cdn
+bun run build
+```
