@@ -4,10 +4,18 @@
   --color-card: #f4f4f5;
   --color-background: #ffffff;
   --color-border: #e4e4e7;
+  --color-input: #e4e4e7;
+  --color-ring: #18181b;
   --color-accent: #e4e4e7;
+  --color-accent-foreground: #18181b;
   --color-foreground: #18181b;
   --color-muted-foreground: #71717a;
   --color-primary: #18181b;
+  --color-primary-foreground: #fafafa;
+  --color-secondary: #f4f4f5;
+  --color-secondary-foreground: #18181b;
+  --color-destructive: #dc2626;
+  --color-destructive-foreground: #fafafa;
 }
 
 html,

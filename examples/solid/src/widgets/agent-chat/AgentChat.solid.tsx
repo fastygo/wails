@@ -1,4 +1,12 @@
 import { For, createSignal, type JSX } from "solid-js";
+import { Block } from "@/ui/block/block.solid";
+import { Box } from "@/ui/box/box.solid";
+import { Button } from "@/ui/button/button.solid";
+import { Label } from "@/ui/label/label.solid";
+import { List, ListItem } from "@/ui/list/list.solid";
+import { Text } from "@/ui/text/text.solid";
+import { Textarea } from "@/ui/textarea/textarea.solid";
+import { Title } from "@/ui/title/title.solid";
 import { fixture, type ChatMessage } from "./fixture.shared";
 
 export type AgentChatProps = {
@@ -26,29 +34,43 @@ export function AgentChat(props: AgentChatProps): JSX.Element {
   };
 
   return (
-    <aside class="flex h-full min-h-0 min-w-0 flex-col bg-card" data-surface="agent-chat" aria-label={title()}>
-      <div class="flex h-8 shrink-0 items-center border-b border-border px-2 text-xs font-medium">{title()}</div>
-      <div class="min-h-0 flex-1 space-y-2 overflow-auto p-2 text-xs" aria-live="polite">
+    <Block tag="aside" class="flex h-full min-h-0 min-w-0 flex-col bg-card" data-surface="agent-chat" aria-label={title()}>
+      <Box class="flex h-8 shrink-0 items-center border-b border-border px-2">
+        <Title as="h2" class="text-xs font-medium">
+          {title()}
+        </Title>
+      </Box>
+      <List tag="ul" class="m-0 min-h-0 flex-1 list-none space-y-2 overflow-auto p-2" aria-live="polite">
         <For each={messages()}>
           {(message) => (
-            <p class={message.role === "user" ? "text-foreground" : "text-muted-foreground"}>{message.text}</p>
+            <ListItem tag="li" class="m-0 list-none">
+              <Text class={message.role === "user" ? "text-xs text-foreground" : "text-xs text-muted-foreground"}>
+                {message.text}
+              </Text>
+            </ListItem>
           )}
         </For>
-      </div>
+      </List>
       <form
-        class="flex border-t border-border"
+        class="flex flex-col gap-2 border-t border-border p-2"
         onSubmit={(event) => {
           event.preventDefault();
           send();
         }}
       >
-        <input
-          class="h-8 min-w-0 flex-1 bg-background px-2 text-xs"
-          aria-label="Agent message"
+        <Label for="agent-draft" class="sr-only">
+          Agent message
+        </Label>
+        <Textarea
+          id="agent-draft"
+          class="min-h-16 resize-none text-xs"
           value={draft()}
           onInput={(event) => setDraft(event.currentTarget.value)}
         />
+        <Button type="submit" size="sm">
+          Send
+        </Button>
       </form>
-    </aside>
+    </Block>
   );
 }

@@ -1,0 +1,132 @@
+schemaVersion: fw.buildy.tech/registry/v0alpha1
+kind: Registry
+metadata:
+  id: fastygo-wails-solid-install
+  status: draft
+records:
+  - id: wails-solid-ui
+    kind: capability
+    version: "0"
+    contract: ui@0
+    readiness: draft
+    source:
+      kind: none
+    notes: Screens are ui8kit items. This record only names the capability so fw.yaml can select the install tools.
+
+  - id: ui8kit-init-solid
+    kind: generator
+    version: 2.0.1
+    readiness: draft
+    source:
+      kind: npm
+      package: ui8kit
+      ref: 2.0.1
+      install: devDependency
+    command:
+      cwd: examples/solid
+      phase: generate
+      exit: zero-on-success
+      argv:
+        - bun
+        - x
+        - ui8kit@2.0.1
+        - init
+        - --yes
+        - --framework
+        - solid
+        - --runtime
+        - solid
+        - --dir
+        - src
+        - --registry-url
+        - https://unpkg.com/@ui8kit/registry@2.0.0/r
+        - --strict-cdn
+    notes: First. Points the app at the primitives registry and installs utils. Do not --skip-core.
+
+  - id: ui8kit-primitives
+    kind: generator
+    version: 2.0.0
+    readiness: draft
+    dependencies:
+      - ui8kit-init-solid
+    source:
+      kind: npm
+      package: "@ui8kit/registry"
+      ref: 2.0.0
+    command:
+      cwd: examples/solid
+      phase: generate
+      exit: zero-on-success
+      argv:
+        - bun
+        - x
+        - ui8kit@2.0.1
+        - add
+        - block
+        - box
+        - button
+        - icon
+        - input
+        - label
+        - list
+        - stack
+        - text
+        - textarea
+        - title
+        - --runtime
+        - solid
+        - --force
+        - --registry-url
+        - https://unpkg.com/@ui8kit/registry@2.0.0/r
+        - --strict-cdn
+    notes: Second. ui8kit add skips registry:utils, and slot has no Solid file. Utils come from init.
+
+  - id: ui8kit-utils-layout
+    kind: generator
+    version: 2.0.1
+    readiness: draft
+    dependencies:
+      - ui8kit-primitives
+    source:
+      kind: none
+    command:
+      cwd: examples/solid
+      phase: generate
+      exit: zero-on-success
+      argv:
+        - bun
+        - -e
+        - 'import { cpSync } from "node:fs"; cpSync("src/utils", "src/components/utils", { recursive: true })'
+    notes: Third. Published bricks import ../../utils from components/ui, which is src/components/utils. init writes src/utils. ui8kit 2.0.1 does not remap that. Copy until the registry path is fixed.
+
+  - id: ui8kit-screens
+    kind: generator
+    version: 0.0.0-draft
+    readiness: draft
+    dependencies:
+      - ui8kit-utils-layout
+    source:
+      kind: none
+    command:
+      cwd: examples/solid
+      phase: generate
+      exit: zero-on-success
+      argv:
+        - bun
+        - x
+        - ui8kit@2.0.1
+        - add
+        - explorer
+        - editor
+        - terminal
+        - agent-chat
+        - browser
+        - workshop-shell
+        - assistant-shell
+        - --runtime
+        - solid
+        - --force
+        - --registry-url
+        - https://raw.githubusercontent.com/fastygo/wails/refs/heads/main/solid/r
+        - --strict-cdn
+    notes: Third. Raw URL is stale until this digest is pushed. npm dependencies on each item (CodeMirror, xterm) are installed by ui8kit add.

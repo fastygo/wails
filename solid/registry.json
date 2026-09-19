@@ -6,8 +6,9 @@
       "type": "registry:widget",
       "runtime": "solid",
       "title": "Explorer",
-      "description": "File tree with fixture nodes. Host data arrives through props.",
+      "description": "File tree composed from UI8Kit primitives. Fixture nodes until the app passes data.",
       "dependencies": ["solid-js"],
+      "registryDependencies": ["block", "box", "button", "icon", "list", "title", "utils"],
       "files": [
         {
           "path": "solid/src/widgets/explorer/Explorer.solid.tsx",
@@ -24,8 +25,18 @@
       "type": "registry:widget",
       "runtime": "solid",
       "title": "Editor",
-      "description": "Tab strip and buffer. Fixture text, no host document service.",
-      "dependencies": ["solid-js"],
+      "description": "CodeMirror buffer and tab strip. Fixture text, no host document service.",
+      "dependencies": [
+        "solid-js",
+        "codemirror",
+        "@codemirror/lang-go",
+        "@codemirror/lang-javascript",
+        "@codemirror/lang-markdown",
+        "@codemirror/state",
+        "@codemirror/theme-one-dark",
+        "@codemirror/view"
+      ],
+      "registryDependencies": ["block", "box", "button", "utils"],
       "files": [
         {
           "path": "solid/src/widgets/editor/Editor.solid.tsx",
@@ -42,8 +53,9 @@
       "type": "registry:widget",
       "runtime": "solid",
       "title": "Terminal",
-      "description": "Line panel with fixture output. No PTY and no host process.",
-      "dependencies": ["solid-js"],
+      "description": "xterm.js panel with fixture lines. No PTY and no host process.",
+      "dependencies": ["solid-js", "@xterm/xterm", "@xterm/addon-fit"],
+      "registryDependencies": ["block", "box", "title", "utils"],
       "files": [
         {
           "path": "solid/src/widgets/terminal/Terminal.solid.tsx",
@@ -60,8 +72,9 @@
       "type": "registry:widget",
       "runtime": "solid",
       "title": "Agent chat",
-      "description": "Chat panel with a fixture reply. No agent runtime.",
+      "description": "Chat panel composed from UI8Kit primitives. Fixture reply, no agent runtime.",
       "dependencies": ["solid-js"],
+      "registryDependencies": ["block", "box", "button", "label", "list", "text", "textarea", "title", "utils"],
       "files": [
         {
           "path": "solid/src/widgets/agent-chat/AgentChat.solid.tsx",
@@ -80,6 +93,7 @@
       "title": "Browser",
       "description": "URL chrome and a preview note. No WebView.",
       "dependencies": ["solid-js"],
+      "registryDependencies": ["block", "box", "button", "input", "text", "title", "utils"],
       "files": [
         {
           "path": "solid/src/widgets/browser/Browser.solid.tsx",
@@ -98,6 +112,7 @@
       "title": "Workshop shell",
       "description": "Files, editor, terminal, and agent slots. Panels are props.",
       "dependencies": ["solid-js"],
+      "registryDependencies": ["block", "box", "text", "utils"],
       "files": [
         {
           "path": "solid/src/layouts/workshop-shell/WorkshopShell.solid.tsx",
@@ -116,6 +131,7 @@
       "title": "Assistant shell",
       "description": "Chat and browse slots. Panels are props.",
       "dependencies": ["solid-js"],
+      "registryDependencies": ["block", "box", "text", "title", "utils"],
       "files": [
         {
           "path": "solid/src/layouts/assistant-shell/AssistantShell.solid.tsx",

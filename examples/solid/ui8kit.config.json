@@ -18,7 +18,7 @@
     "@/widgets": "./src/widgets"
   },
   "registry": "@ui8kit",
-  "registryUrl": "https://raw.githubusercontent.com/fastygo/wails/refs/heads/main/solid/r",
+  "registryUrl": "https://unpkg.com/@ui8kit/registry@2.0.0/r",
   "strictCdn": true,
   "importStyle": "alias"
 }

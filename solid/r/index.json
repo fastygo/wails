@@ -5,41 +5,78 @@
       "name": "explorer",
       "type": "registry:widget",
       "title": "Explorer",
-      "description": "File tree with fixture nodes. Host data arrives through props.",
+      "description": "File tree composed from UI8Kit primitives. Fixture nodes until the app passes data.",
       "dependencies": [
         "solid-js"
       ],
-      "registryDependencies": []
+      "registryDependencies": [
+        "block",
+        "box",
+        "button",
+        "icon",
+        "list",
+        "title",
+        "utils"
+      ]
     },
     {
       "name": "editor",
       "type": "registry:widget",
       "title": "Editor",
-      "description": "Tab strip and buffer. Fixture text, no host document service.",
+      "description": "CodeMirror buffer and tab strip. Fixture text, no host document service.",
       "dependencies": [
-        "solid-js"
+        "solid-js",
+        "codemirror",
+        "@codemirror/lang-go",
+        "@codemirror/lang-javascript",
+        "@codemirror/lang-markdown",
+        "@codemirror/state",
+        "@codemirror/theme-one-dark",
+        "@codemirror/view"
       ],
-      "registryDependencies": []
+      "registryDependencies": [
+        "block",
+        "box",
+        "button",
+        "utils"
+      ]
     },
     {
       "name": "terminal",
       "type": "registry:widget",
       "title": "Terminal",
-      "description": "Line panel with fixture output. No PTY and no host process.",
+      "description": "xterm.js panel with fixture lines. No PTY and no host process.",
       "dependencies": [
-        "solid-js"
+        "solid-js",
+        "@xterm/xterm",
+        "@xterm/addon-fit"
       ],
-      "registryDependencies": []
+      "registryDependencies": [
+        "block",
+        "box",
+        "title",
+        "utils"
+      ]
     },
     {
       "name": "agent-chat",
       "type": "registry:widget",
       "title": "Agent chat",
-      "description": "Chat panel with a fixture reply. No agent runtime.",
+      "description": "Chat panel composed from UI8Kit primitives. Fixture reply, no agent runtime.",
       "dependencies": [
         "solid-js"
       ],
-      "registryDependencies": []
+      "registryDependencies": [
+        "block",
+        "box",
+        "button",
+        "label",
+        "list",
+        "text",
+        "textarea",
+        "title",
+        "utils"
+      ]
     },
     {
       "name": "browser",
@@ -49,7 +86,15 @@
       "dependencies": [
         "solid-js"
       ],
-      "registryDependencies": []
+      "registryDependencies": [
+        "block",
+        "box",
+        "button",
+        "input",
+        "text",
+        "title",
+        "utils"
+      ]
     },
     {
       "name": "workshop-shell",
@@ -59,7 +104,12 @@
       "dependencies": [
         "solid-js"
       ],
-      "registryDependencies": []
+      "registryDependencies": [
+        "block",
+        "box",
+        "text",
+        "utils"
+      ]
     },
     {
       "name": "assistant-shell",
@@ -69,7 +119,13 @@
       "dependencies": [
         "solid-js"
       ],
-      "registryDependencies": []
+      "registryDependencies": [
+        "block",
+        "box",
+        "text",
+        "title",
+        "utils"
+      ]
     }
   ],
   "categories": [
@@ -83,6 +139,6 @@
     "widgets"
   ],
   "version": "1.0.0",
-  "lastUpdated": "2026-09-19T12:47:15.073Z",
+  "lastUpdated": "2026-09-19T13:40:41.792Z",
   "registry": "ui"
 }

@@ -9,10 +9,17 @@
     "solid-js"
   ],
   "devDependencies": [],
+  "registryDependencies": [
+    "block",
+    "box",
+    "text",
+    "title",
+    "utils"
+  ],
   "files": [
     {
       "path": "solid/src/layouts/assistant-shell/AssistantShell.solid.tsx",
-      "content": "import { Show, type JSX } from \"solid-js\";\r\nimport { fixture } from \"./fixture.shared\";\r\n\r\nexport type AssistantShellProps = {\r\n  title?: string;\r\n  chat?: JSX.Element;\r\n  browse?: JSX.Element;\r\n};\r\n\r\nexport function AssistantShell(props: AssistantShellProps): JSX.Element {\r\n  const title = () => props.title ?? fixture.title;\r\n  return (\r\n    <div class=\"flex h-full min-h-0 min-w-0 flex-col\" data-surface=\"assistant-shell\">\r\n      <header class=\"flex h-8 shrink-0 items-center border-b border-border px-2 text-xs font-medium\">{title()}</header>\r\n      <div class=\"flex min-h-0 flex-1\">\r\n        <div class=\"min-w-0 flex-1 border-r border-border\" aria-label={fixture.chat}>\r\n          <Show when={props.chat} fallback={<p class=\"p-2 text-xs text-muted-foreground\">{fixture.empty}</p>}>\r\n            {props.chat}\r\n          </Show>\r\n        </div>\r\n        <div class=\"min-w-0 flex-1\" aria-label={fixture.browse}>\r\n          <Show when={props.browse} fallback={<p class=\"p-2 text-xs text-muted-foreground\">{fixture.empty}</p>}>\r\n            {props.browse}\r\n          </Show>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  );\r\n}\r\n",
+      "content": "import { Show, type JSX } from \"solid-js\";\r\nimport { Block } from \"@/ui/block/block.solid\";\r\nimport { Box } from \"@/ui/box/box.solid\";\r\nimport { Text } from \"@/ui/text/text.solid\";\r\nimport { Title } from \"@/ui/title/title.solid\";\r\nimport { fixture } from \"./fixture.shared\";\r\n\r\nexport type AssistantShellProps = {\r\n  title?: string;\r\n  chat?: JSX.Element;\r\n  browse?: JSX.Element;\r\n};\r\n\r\nexport function AssistantShell(props: AssistantShellProps): JSX.Element {\r\n  const title = () => props.title ?? fixture.title;\r\n\r\n  return (\r\n    <Block class=\"flex h-full min-h-0 min-w-0 flex-col\" data-surface=\"assistant-shell\">\r\n      <Box class=\"flex h-8 shrink-0 items-center border-b border-border px-2\">\r\n        <Title as=\"h2\" class=\"text-xs font-medium\">\r\n          {title()}\r\n        </Title>\r\n      </Box>\r\n      <Box class=\"flex min-h-0 flex-1\">\r\n        <Box class=\"min-w-0 flex-1 border-r border-border\" aria-label={fixture.chat}>\r\n          <Show when={props.chat} fallback={<Text class=\"p-2 text-xs text-muted-foreground\">{fixture.empty}</Text>}>\r\n            {props.chat}\r\n          </Show>\r\n        </Box>\r\n        <Box class=\"min-w-0 flex-1\" aria-label={fixture.browse}>\r\n          <Show when={props.browse} fallback={<Text class=\"p-2 text-xs text-muted-foreground\">{fixture.empty}</Text>}>\r\n            {props.browse}\r\n          </Show>\r\n        </Box>\r\n      </Box>\r\n    </Block>\r\n  );\r\n}\r\n",
       "target": "layouts/assistant-shell/AssistantShell.solid.tsx"
     },
     {

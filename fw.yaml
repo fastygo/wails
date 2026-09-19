@@ -1,0 +1,18 @@
+schemaVersion: fw.buildy.tech/v0alpha1
+kind: Product
+metadata:
+  name: wails-solid-example
+  description: Install order for the Solid example. Primitives first, then fastygo/wails screens.
+registries:
+  - id: wails-solid-install
+    source: ./registry/install.yaml
+composition:
+  capabilities:
+    ui:
+      use: wails-solid-ui
+quality:
+  validators:
+    - ui8kit-init-solid
+    - ui8kit-primitives
+    - ui8kit-utils-layout
+    - ui8kit-screens

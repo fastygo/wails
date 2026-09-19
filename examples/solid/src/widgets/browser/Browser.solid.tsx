@@ -1,4 +1,10 @@
 import { createSignal, type JSX } from "solid-js";
+import { Block } from "@/ui/block/block.solid";
+import { Box } from "@/ui/box/box.solid";
+import { Button } from "@/ui/button/button.solid";
+import { Input } from "@/ui/input/input.solid";
+import { Text } from "@/ui/text/text.solid";
+import { Title } from "@/ui/title/title.solid";
 import { fixture } from "./fixture.shared";
 
 export type BrowserProps = {
@@ -21,8 +27,12 @@ export function Browser(props: BrowserProps): JSX.Element {
   };
 
   return (
-    <section class="flex h-full min-h-0 flex-col bg-card" data-surface="browser" aria-label={title()}>
-      <div class="flex h-8 shrink-0 items-center border-b border-border px-2 text-xs font-medium">{title()}</div>
+    <Block tag="section" class="flex h-full min-h-0 flex-col bg-card" data-surface="browser" aria-label={title()}>
+      <Box class="flex h-8 shrink-0 items-center border-b border-border px-2">
+        <Title as="h2" class="text-xs font-medium">
+          {title()}
+        </Title>
+      </Box>
       <form
         class="flex gap-2 border-b border-border p-2"
         onSubmit={(event) => {
@@ -30,21 +40,21 @@ export function Browser(props: BrowserProps): JSX.Element {
           go();
         }}
       >
-        <input
+        <Input
           type="url"
-          class="h-8 min-w-0 flex-1 bg-background px-2 text-xs"
+          class="h-8 min-w-0 flex-1 text-xs"
           aria-label="Browse URL"
           value={url()}
           onInput={(event) => setUrl(event.currentTarget.value)}
         />
-        <button type="submit" class="h-8 px-2 text-xs">
+        <Button type="submit" size="sm">
           Go
-        </button>
+        </Button>
       </form>
-      <div class="min-h-0 flex-1 p-4 text-sm" role="region" aria-label="Browse preview">
-        <p>{props.note ?? fixture.note}</p>
-        <p class="text-muted-foreground">{loaded()}</p>
-      </div>
-    </section>
+      <Box class="min-h-0 flex-1 p-4" role="region" aria-label="Browse preview">
+        <Text class="text-sm">{props.note ?? fixture.note}</Text>
+        <Text class="text-sm text-muted-foreground">{loaded()}</Text>
+      </Box>
+    </Block>
   );
 }

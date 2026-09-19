@@ -3,16 +3,24 @@
   "name": "terminal",
   "type": "registry:widget",
   "title": "Terminal",
-  "description": "Line panel with fixture output. No PTY and no host process.",
+  "description": "xterm.js panel with fixture lines. No PTY and no host process.",
   "runtime": "solid",
   "dependencies": [
-    "solid-js"
+    "solid-js",
+    "@xterm/xterm",
+    "@xterm/addon-fit"
   ],
   "devDependencies": [],
+  "registryDependencies": [
+    "block",
+    "box",
+    "title",
+    "utils"
+  ],
   "files": [
     {
       "path": "solid/src/widgets/terminal/Terminal.solid.tsx",
-      "content": "import { For, createSignal, type JSX } from \"solid-js\";\r\nimport { fixture } from \"./fixture.shared\";\r\n\r\nexport type TerminalProps = {\r\n  title?: string;\r\n  lines?: string[];\r\n  onSubmit?: (line: string) => void;\r\n};\r\n\r\nexport function Terminal(props: TerminalProps): JSX.Element {\r\n  const [lines, setLines] = createSignal(props.lines ?? fixture.lines);\r\n  const [draft, setDraft] = createSignal(\"\");\r\n  const title = () => props.title ?? fixture.title;\r\n\r\n  const submit = () => {\r\n    const line = draft().trim();\r\n    if (!line) return;\r\n    setLines((prev) => [...prev, `$ ${line}`]);\r\n    setDraft(\"\");\r\n    props.onSubmit?.(line);\r\n  };\r\n\r\n  return (\r\n    <section class=\"flex h-full min-h-0 flex-col bg-card\" data-surface=\"terminal\" aria-label={title()}>\r\n      <div class=\"flex h-8 shrink-0 items-center border-b border-border px-2 text-xs font-medium\">{title()}</div>\r\n      <pre class=\"m-0 min-h-0 flex-1 overflow-auto p-2 font-mono text-xs\">\r\n        <For each={lines()}>{(line) => <div>{line}</div>}</For>\r\n      </pre>\r\n      <form\r\n        class=\"flex border-t border-border\"\r\n        onSubmit={(event) => {\r\n          event.preventDefault();\r\n          submit();\r\n        }}\r\n      >\r\n        <input\r\n          class=\"h-8 min-w-0 flex-1 bg-background px-2 font-mono text-xs\"\r\n          aria-label=\"Terminal input\"\r\n          value={draft()}\r\n          onInput={(event) => setDraft(event.currentTarget.value)}\r\n        />\r\n      </form>\r\n    </section>\r\n  );\r\n}\r\n",
+      "content": "import { FitAddon } from \"@xterm/addon-fit\";\r\nimport { Terminal as XTerm } from \"@xterm/xterm\";\r\nimport \"@xterm/xterm/css/xterm.css\";\r\nimport { onCleanup, onMount, type JSX } from \"solid-js\";\r\nimport { Block } from \"@/ui/block/block.solid\";\r\nimport { Box } from \"@/ui/box/box.solid\";\r\nimport { Title } from \"@/ui/title/title.solid\";\r\nimport { fixture } from \"./fixture.shared\";\r\n\r\nexport type TerminalProps = {\r\n  title?: string;\r\n  lines?: string[];\r\n  onSubmit?: (line: string) => void;\r\n};\r\n\r\nexport function Terminal(props: TerminalProps): JSX.Element {\r\n  let host: HTMLDivElement | undefined;\r\n  const title = () => props.title ?? fixture.title;\r\n\r\n  onMount(() => {\r\n    const term = new XTerm({ convertEol: true, fontSize: 13, cursorBlink: false });\r\n    const fit = new FitAddon();\r\n    term.loadAddon(fit);\r\n    term.open(host!);\r\n    for (const line of props.lines ?? fixture.lines) term.writeln(line);\r\n    fit.fit();\r\n\r\n    let draft = \"\";\r\n    term.onData((data) => {\r\n      if (data === \"\\r\") {\r\n        term.write(\"\\r\\n\");\r\n        const line = draft;\r\n        draft = \"\";\r\n        if (line) props.onSubmit?.(line);\r\n        return;\r\n      }\r\n      if (data === \"\\u007f\") {\r\n        if (!draft) return;\r\n        draft = draft.slice(0, -1);\r\n        term.write(\"\\b \\b\");\r\n        return;\r\n      }\r\n      if (data < \" \" || data.startsWith(\"\\u001b\")) return;\r\n      draft += data;\r\n      term.write(data);\r\n    });\r\n\r\n    onCleanup(() => term.dispose());\r\n  });\r\n\r\n  return (\r\n    <Block tag=\"section\" class=\"flex h-full min-h-0 flex-col bg-card\" data-surface=\"terminal\" aria-label={title()}>\r\n      <Box class=\"flex h-8 shrink-0 items-center border-b border-border px-2\">\r\n        <Title as=\"h2\" class=\"text-xs font-medium\">\r\n          {title()}\r\n        </Title>\r\n      </Box>\r\n      {/* xterm owns this node. Kit Box does not forward ref. */}\r\n      <div ref={host} class=\"min-h-0 flex-1\" />\r\n    </Block>\r\n  );\r\n}\r\n",
       "target": "widgets/terminal/Terminal.solid.tsx"
     },
     {

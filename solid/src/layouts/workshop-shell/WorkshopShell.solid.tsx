@@ -1,4 +1,7 @@
 import { Show, type JSX } from "solid-js";
+import { Block } from "@/ui/block/block.solid";
+import { Box } from "@/ui/box/box.solid";
+import { Text } from "@/ui/text/text.solid";
 import { fixture } from "./fixture.shared";
 
 export type WorkshopShellProps = {
@@ -10,29 +13,29 @@ export type WorkshopShellProps = {
 
 export function WorkshopShell(props: WorkshopShellProps): JSX.Element {
   return (
-    <div class="flex h-full min-h-0 min-w-0" data-surface="workshop-shell">
-      <div class="flex w-64 min-w-0 shrink-0 flex-col border-r border-border" aria-label={fixture.files}>
-        <Show when={props.files} fallback={<p class="p-2 text-xs text-muted-foreground">{fixture.empty}</p>}>
+    <Block class="flex h-full min-h-0 min-w-0" data-surface="workshop-shell">
+      <Box class="flex w-64 min-w-0 shrink-0 flex-col border-r border-border" aria-label={fixture.files}>
+        <Show when={props.files} fallback={<Text class="p-2 text-xs text-muted-foreground">{fixture.empty}</Text>}>
           {props.files}
         </Show>
-      </div>
-      <div class="flex min-h-0 min-w-0 flex-1 flex-col">
-        <div class="min-h-0 flex-1" aria-label={fixture.editor}>
-          <Show when={props.editor} fallback={<p class="p-2 text-xs text-muted-foreground">{fixture.empty}</p>}>
+      </Box>
+      <Box class="flex min-h-0 min-w-0 flex-1 flex-col">
+        <Box class="min-h-0 flex-1" aria-label={fixture.editor}>
+          <Show when={props.editor} fallback={<Text class="p-2 text-xs text-muted-foreground">{fixture.empty}</Text>}>
             {props.editor}
           </Show>
-        </div>
-        <div class="h-40 shrink-0 border-t border-border" aria-label={fixture.terminal}>
-          <Show when={props.terminal} fallback={<p class="p-2 text-xs text-muted-foreground">{fixture.empty}</p>}>
+        </Box>
+        <Box class="h-40 shrink-0 border-t border-border" aria-label={fixture.terminal}>
+          <Show when={props.terminal} fallback={<Text class="p-2 text-xs text-muted-foreground">{fixture.empty}</Text>}>
             {props.terminal}
           </Show>
-        </div>
-      </div>
-      <div class="flex w-80 min-w-0 shrink-0 flex-col border-l border-border" aria-label={fixture.agent}>
-        <Show when={props.agent} fallback={<p class="p-2 text-xs text-muted-foreground">{fixture.empty}</p>}>
+        </Box>
+      </Box>
+      <Box class="flex w-80 min-w-0 shrink-0 flex-col border-l border-border" aria-label={fixture.agent}>
+        <Show when={props.agent} fallback={<Text class="p-2 text-xs text-muted-foreground">{fixture.empty}</Text>}>
           {props.agent}
         </Show>
-      </div>
-    </div>
+      </Box>
+    </Block>
   );
 }
