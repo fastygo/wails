@@ -1,4 +1,4 @@
-import { For, createSignal, type JSX } from "solid-js";
+import { For, createEffect, createSignal, type JSX } from "solid-js";
 import { Block } from "@/ui/block/block.solid";
 import { Box } from "@/ui/box/box.solid";
 import { Button } from "@/ui/button/button.solid";
@@ -19,16 +19,21 @@ export function AgentChat(props: AgentChatProps): JSX.Element {
   const [messages, setMessages] = createSignal(props.messages ?? fixture.messages);
   const [draft, setDraft] = createSignal("");
   const title = () => props.title ?? fixture.title;
+  createEffect(() => {
+    if (props.messages) setMessages(props.messages);
+  });
 
   const send = () => {
     const text = draft().trim();
     if (!text) return;
     const id = String(Date.now());
-    setMessages((prev) => [
-      ...prev,
-      { id, role: "user", text },
-      { id: `${id}-fixture`, role: "assistant", text: "Fixture reply. No agent runtime is connected." },
-    ]);
+    setMessages((prev) => {
+      const next: ChatMessage[] = [...prev, { id, role: "user", text }];
+      if (!props.onSend) {
+        next.push({ id: `${id}-fixture`, role: "assistant", text: "Fixture reply. No agent runtime is connected." });
+      }
+      return next;
+    });
     setDraft("");
     props.onSend?.(text);
   };

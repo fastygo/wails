@@ -14,7 +14,9 @@
         "box",
         "button",
         "icon",
+        "input",
         "list",
+        "text",
         "title",
         "utils"
       ]
@@ -23,7 +25,7 @@
       "name": "editor",
       "type": "registry:widget",
       "title": "Editor",
-      "description": "CodeMirror buffer and tab strip. Fixture text, no host document service.",
+      "description": "CodeMirror buffer, tabs, breadcrumb, and status line.",
       "dependencies": [
         "solid-js",
         "codemirror",
@@ -38,6 +40,8 @@
         "block",
         "box",
         "button",
+        "icon",
+        "text",
         "utils"
       ]
     },
@@ -54,7 +58,8 @@
       "registryDependencies": [
         "block",
         "box",
-        "title",
+        "button",
+        "text",
         "utils"
       ]
     },
@@ -70,11 +75,30 @@
         "block",
         "box",
         "button",
+        "icon",
         "label",
         "list",
         "text",
         "textarea",
         "title",
+        "utils"
+      ]
+    },
+    {
+      "name": "git",
+      "type": "registry:widget",
+      "title": "Git",
+      "description": "Source control list. Snapshot and actions come from the app.",
+      "dependencies": [
+        "solid-js"
+      ],
+      "registryDependencies": [
+        "block",
+        "box",
+        "button",
+        "icon",
+        "text",
+        "textarea",
         "utils"
       ]
     },
@@ -139,6 +163,6 @@
     "widgets"
   ],
   "version": "1.0.0",
-  "lastUpdated": "2026-09-19T13:40:41.792Z",
+  "lastUpdated": "2026-09-19T16:08:09.892Z",
   "registry": "ui"
 }

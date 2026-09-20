@@ -8,7 +8,7 @@
       "title": "Explorer",
       "description": "File tree composed from UI8Kit primitives. Fixture nodes until the app passes data.",
       "dependencies": ["solid-js"],
-      "registryDependencies": ["block", "box", "button", "icon", "list", "title", "utils"],
+      "registryDependencies": ["block", "box", "button", "icon", "input", "list", "text", "title", "utils"],
       "files": [
         {
           "path": "solid/src/widgets/explorer/Explorer.solid.tsx",
@@ -25,7 +25,7 @@
       "type": "registry:widget",
       "runtime": "solid",
       "title": "Editor",
-      "description": "CodeMirror buffer and tab strip. Fixture text, no host document service.",
+      "description": "CodeMirror buffer, tabs, breadcrumb, and status line.",
       "dependencies": [
         "solid-js",
         "codemirror",
@@ -36,7 +36,7 @@
         "@codemirror/theme-one-dark",
         "@codemirror/view"
       ],
-      "registryDependencies": ["block", "box", "button", "utils"],
+      "registryDependencies": ["block", "box", "button", "icon", "text", "utils"],
       "files": [
         {
           "path": "solid/src/widgets/editor/Editor.solid.tsx",
@@ -55,7 +55,7 @@
       "title": "Terminal",
       "description": "xterm.js panel with fixture lines. No PTY and no host process.",
       "dependencies": ["solid-js", "@xterm/xterm", "@xterm/addon-fit"],
-      "registryDependencies": ["block", "box", "title", "utils"],
+      "registryDependencies": ["block", "box", "button", "text", "utils"],
       "files": [
         {
           "path": "solid/src/widgets/terminal/Terminal.solid.tsx",
@@ -74,7 +74,7 @@
       "title": "Agent chat",
       "description": "Chat panel composed from UI8Kit primitives. Fixture reply, no agent runtime.",
       "dependencies": ["solid-js"],
-      "registryDependencies": ["block", "box", "button", "label", "list", "text", "textarea", "title", "utils"],
+      "registryDependencies": ["block", "box", "button", "icon", "label", "list", "text", "textarea", "title", "utils"],
       "files": [
         {
           "path": "solid/src/widgets/agent-chat/AgentChat.solid.tsx",
@@ -83,6 +83,25 @@
         {
           "path": "solid/src/widgets/agent-chat/fixture.shared.ts",
           "target": "widgets/agent-chat/fixture.shared.ts"
+        }
+      ]
+    },
+    {
+      "name": "git",
+      "type": "registry:widget",
+      "runtime": "solid",
+      "title": "Git",
+      "description": "Source control list. Snapshot and actions come from the app.",
+      "dependencies": ["solid-js"],
+      "registryDependencies": ["block", "box", "button", "icon", "text", "textarea", "utils"],
+      "files": [
+        {
+          "path": "solid/src/widgets/git/Git.solid.tsx",
+          "target": "widgets/git/Git.solid.tsx"
+        },
+        {
+          "path": "solid/src/widgets/git/fixture.shared.ts",
+          "target": "widgets/git/fixture.shared.ts"
         }
       ]
     },

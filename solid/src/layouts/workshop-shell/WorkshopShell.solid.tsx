@@ -14,7 +14,7 @@ export type WorkshopShellProps = {
 export function WorkshopShell(props: WorkshopShellProps): JSX.Element {
   return (
     <Block class="flex h-full min-h-0 min-w-0" data-surface="workshop-shell">
-      <Box class="flex w-64 min-w-0 shrink-0 flex-col border-r border-border" aria-label={fixture.files}>
+      <Box class="flex w-[20%] min-w-48 max-w-80 shrink-0 flex-col border-r border-border" aria-label={fixture.files}>
         <Show when={props.files} fallback={<Text class="p-2 text-xs text-muted-foreground">{fixture.empty}</Text>}>
           {props.files}
         </Show>
@@ -25,13 +25,13 @@ export function WorkshopShell(props: WorkshopShellProps): JSX.Element {
             {props.editor}
           </Show>
         </Box>
-        <Box class="h-40 shrink-0 border-t border-border" aria-label={fixture.terminal}>
+        <Box class="h-52 shrink-0 border-t border-border" aria-label={fixture.terminal}>
           <Show when={props.terminal} fallback={<Text class="p-2 text-xs text-muted-foreground">{fixture.empty}</Text>}>
             {props.terminal}
           </Show>
         </Box>
       </Box>
-      <Box class="flex w-80 min-w-0 shrink-0 flex-col border-l border-border" aria-label={fixture.agent}>
+      <Box class="flex w-[28%] min-w-64 max-w-96 shrink-0 flex-col border-l border-border" aria-label={fixture.agent}>
         <Show when={props.agent} fallback={<Text class="p-2 text-xs text-muted-foreground">{fixture.empty}</Text>}>
           {props.agent}
         </Show>
